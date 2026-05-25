@@ -51,7 +51,7 @@ class Orchestrator:
         console.rule("[cyan]Step 2 — Read & Extract[/cyan]")
         reader_result = self.agents["reader"].run({
             "goal": goal,
-            "urls": urls
+            "raw_search": search_result.output
         })
         self.memory.write("ReaderAgent", reader_result.output)
 

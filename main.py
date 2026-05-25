@@ -14,8 +14,8 @@ def main():
     )
     parser.add_argument(
         "--model",
-        default="llama3",
-        help="Ollama model to use (default: llama3)"
+        default="phi3:mini",
+        help="Ollama model to use (default: phi3:mini)"
     )
     parser.add_argument(
         "--output",
