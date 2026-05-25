@@ -1,0 +1,5 @@
+ollama
+playwright
+beautifulsoup4
+duckduckgo-search
+rich
