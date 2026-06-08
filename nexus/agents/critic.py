@@ -37,10 +37,17 @@ IMPROVED VERSION:
 
         response = self.think(critique_prompt, system=self.role)
 
-        if "IMPROVED VERSION:" in response:
-            final = response.split("IMPROVED VERSION:")[-1].strip()
+        # Case-insensitive search for the improved version delimiter
+        lower = response.lower()
+        marker = "improved version:"
+        idx = lower.rfind(marker)
+        if idx != -1:
+            final = response[idx + len(marker):].strip()
         else:
-            final = response
+            # Fallback: strip everything before the last double-newline block
+            # (usually the critique section) and return the rest
+            parts = response.strip().split("\n\n")
+            final = "\n\n".join(parts[1:]).strip() if len(parts) > 1 else response.strip()
 
         self.log("Final version ready")
         return AgentResult(

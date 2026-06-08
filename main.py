@@ -14,8 +14,8 @@ def main():
     )
     parser.add_argument(
         "--model",
-        default="phi3:mini",
-        help="Ollama model to use (default: phi3:mini)"
+        default="llama-3.3-70b-versatile",
+        help="Groq model to use (default: llama-3.3-70b-versatile)"
     )
     parser.add_argument(
         "--output",

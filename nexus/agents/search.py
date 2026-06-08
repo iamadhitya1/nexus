@@ -37,8 +37,20 @@ Return ONLY the queries, one per line, nothing else."""
         all_results = []
         for query in queries:
             self.log(f"Searching: {query}")
-            results = search_web(query, max_results=4)
-            all_results.extend(results)
+            try:
+                results = search_web(query, max_results=4)
+                all_results.extend(results)
+            except RuntimeError as e:
+                self.log(f"[yellow]Search failed: {e}[/yellow]")
+
+        if not all_results:
+            return AgentResult(
+                agent=self.name,
+                output="",
+                success=False,
+                error="All search queries returned no results. Check your network connection or try a different goal.",
+                metadata={"urls": []}
+            )
 
         seen_urls = set()
         unique_results = []

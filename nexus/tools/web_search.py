@@ -5,6 +5,7 @@ def search_web(query: str, max_results: int = 5) -> list[dict]:
     """
     Search the web using DuckDuckGo. No API key required.
     Returns a list of results with title, url, and snippet.
+    Raises RuntimeError if the search fails.
     """
     results = []
     try:
@@ -15,6 +16,6 @@ def search_web(query: str, max_results: int = 5) -> list[dict]:
                 "url": r.get("href", ""),
                 "snippet": r.get("body", "")
             })
-    except Exception:
-        pass
+    except Exception as e:
+        raise RuntimeError(f"Web search failed for query '{query}': {e}") from e
     return results
